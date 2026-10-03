@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Initialize project scaffold",
+			"type": "shell",
+			"command": "cmd /c \"mkdir apps\\web apps\\api packages\\shared packages\\ui docs scripts .github && mkdir apps\\web\\src apps\\api\\src packages\\shared\\src packages\\ui\\src docs\\adr .github\\workflows\"",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

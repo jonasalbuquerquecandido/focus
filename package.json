@@ -1,0 +1,15 @@
+{
+  "name": "focusflow",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "echo 'Desenvolvimento ainda não implementado.'",
+    "build": "echo 'Build ainda não implementado.'",
+    "lint": "echo 'Lint ainda não implementado.'",
+    "test": "echo 'Testes ainda não implementados.'"
+  }
+}
