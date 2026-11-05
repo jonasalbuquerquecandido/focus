@@ -10,9 +10,10 @@ O objetivo do FocusFlow não é apenas entregar uma aplicação funcional, mas c
 
 ## 1. Identidade do projeto
 
-Nome: FocusFlow
+**Nome:** FocusFlow
 
-Objetivo:
+**Objetivo:**
+
 - Construir uma aplicação realista de produtividade pessoal para portfólio e laboratório de aprendizado em:
   - Backend Java
   - Spring Boot
@@ -30,6 +31,7 @@ Objetivo:
 ## 2. Prioridades
 
 Ordem de prioridade:
+
 1. Backend Java
 2. Segurança
 3. Banco de dados e integridade
@@ -44,6 +46,7 @@ Observação: frontend é secundário e existe apenas para demonstrar e testar a
 ## 3. Stack
 
 ### Backend
+
 - Java 25 LTS
 - Spring Boot em versão estável compatível com Java 25
 - Spring Web
@@ -54,16 +57,19 @@ Observação: frontend é secundário e existe apenas para demonstrar e testar a
 - Maven
 
 ### Banco
+
 - PostgreSQL
 - Flyway
 
 ### Testes
+
 - JUnit
 - Mockito
 - Spring Boot Test
 - Testcontainers quando apropriado
 
 ### Infraestrutura
+
 - Git
 - GitHub
 - Docker
@@ -73,6 +79,7 @@ Observação: frontend é secundário e existe apenas para demonstrar e testar a
 - HTTPS / TLS
 
 ### Cloud
+
 - AWS posteriormente, quando necessário
 - EC2
 - RDS
@@ -88,23 +95,26 @@ Não adicionar serviços cloud sem necessidade técnica.
 Java 25 LTS é a versão oficial do projeto.
 
 Regras:
+
 - Não fazer downgrade automático para Java 17 ou outra versão.
 - Antes de adicionar ou atualizar Spring Boot ou dependências importantes:
-  1. verificar compatibilidade com Java 25;
-  2. preferir versões estáveis;
-  3. evitar recursos experimentais;
-  4. explicar incompatibilidades antes de alterar a versão do Java.
+  1. Verificar compatibilidade com Java 25.
+  2. Preferir versões estáveis.
+  3. Evitar recursos experimentais.
+  4. Explicar incompatibilidades antes de alterar a versão do Java.
 
 O objetivo é usar Java moderno sem criar dependência desnecessária de recursos específicos que prejudiquem a portabilidade para ambientes corporativos.
 
 ## 5. Arquitetura
 
 A arquitetura inicial será:
-- Modular Monolith
+
+- Modular Monolith.
 
 Não criar microservices sem necessidade técnica concreta.
 
 A estrutura deve separar módulos e responsabilidades com clareza. Os módulos esperados incluem:
+
 - user
 - auth
 - task
@@ -123,19 +133,21 @@ Não criar abstrações ou módulos vazios apenas para seguir um padrão.
 
 A API será REST.
 
-Versão inicial:
-- /api/v1
+**Versão inicial:**
+
+- `/api/v1`
 
 Regras:
-- usar DTOs;
-- validar entradas;
-- usar métodos HTTP apropriados;
-- usar status codes HTTP adequados;
-- ter tratamento global de exceções;
-- respostas de erro consistentes;
-- paginação quando necessário;
-- nunca expor entidades JPA diretamente pela API;
-- regra de negócio não deve ficar concentrada em controllers.
+
+- Usar DTOs.
+- Validar entradas.
+- Usar métodos HTTP apropriados.
+- Usar status codes HTTP adequados.
+- Ter tratamento global de exceções.
+- Manter respostas de erro consistentes.
+- Implementar paginação quando necessário.
+- Nunca expor entidades JPA diretamente pela API.
+- Não concentrar regras de negócio nos controllers.
 
 ## 7. Banco de dados
 
@@ -150,13 +162,14 @@ Não usar criação automática destrutiva do schema em ambientes reais.
 A integridade dos dados deve ser garantida pela aplicação e pelo banco, quando apropriado.
 
 Considerar:
+
 - NOT NULL
 - UNIQUE
 - FOREIGN KEY
 - CHECK
-- índices
-- constraints
-- transações
+- Índices
+- Constraints
+- Transações
 
 ## 8. Segurança — Security by Design
 
@@ -165,31 +178,33 @@ Segurança é requisito transversal do projeto.
 Não tratar segurança como etapa final.
 
 Considerar desde o início:
+
 - OWASP Top 10
-- autenticação
-- autorização
+- Autenticação
+- Autorização
 - RBAC
 - JWT
-- refresh tokens quando apropriado
-- controle de acesso por recurso
+- Refresh tokens quando apropriado
+- Controle de acesso por recurso
 - BOLA / IDOR
-- privilege escalation
-- validação de entrada
-- proteção contra injection
-- proteção de dados
-- secrets management
-- logging seguro
-- auditoria
-- segurança de dependências
-- segurança de containers
-- segurança de cloud
-- segurança de CI/CD
+- Privilege escalation
+- Validação de entrada
+- Proteção contra injection
+- Proteção de dados
+- Secrets management
+- Logging seguro
+- Auditoria
+- Segurança de dependências
+- Segurança de containers
+- Segurança de cloud
+- Segurança de CI/CD
 
 Nunca armazenar no código ou no Git:
-- senhas em texto puro
-- secrets hardcoded
-- tokens privados
-- credenciais AWS
+
+- Senhas em texto puro
+- Secrets hardcoded
+- Tokens privados
+- Credenciais AWS
 - API keys
 
 ## 9. Threat Modeling
@@ -199,41 +214,45 @@ Para funcionalidades sensíveis, usar princípios de threat modeling.
 Considerar STRIDE quando apropriado.
 
 Perguntas-chave:
-- quem pode acessar?
-- quem pode alterar?
-- que dados podem vazar?
-- que ações precisam de auditoria?
-- como um usuário pode abusar da funcionalidade?
-- o que acontece se uma requisição for repetida?
-- o que acontece sob concorrência?
 
-Riscos relevantes devem ser registrados em docs/security.md.
+- Quem pode acessar?
+- Quem pode alterar?
+- Que dados podem vazar?
+- Que ações precisam de auditoria?
+- Como um usuário pode abusar da funcionalidade?
+- O que acontece se uma requisição for repetida?
+- O que acontece sob concorrência?
+
+Riscos relevantes devem ser registrados em `docs/security.md`.
 
 ## 10. Autenticação e autorização
 
 A autenticação será baseada em Spring Security.
 
 Considerar:
-- senha com hash seguro
+
+- Senha com hash seguro
 - JWT
-- access token
-- refresh token quando necessário
-- expiração
-- validação de token
+- Access token
+- Refresh token quando necessário
+- Expiração
+- Validação de token
 - RBAC
-- autorização contextual
-- ownership de recursos
+- Autorização contextual
+- Ownership de recursos
 
 Nunca assumir que um usuário autenticado é automaticamente autorizado a acessar qualquer recurso.
 
 Exemplo:
-- GET /api/v1/tasks/{id} deve passar por verificação de autorização e ownership.
+
+- `GET /api/v1/tasks/{id}` deve passar por verificação de autorização e ownership.
 
 ## 11. Módulo financeiro
 
 O módulo financeiro deve simular problemas reais de sistemas transacionais.
 
 Entidades possíveis:
+
 - Account
 - Transaction
 - Category
@@ -241,17 +260,18 @@ Entidades possíveis:
 - Statement
 
 Considerar:
+
 - ACID
-- transactions
-- isolation
-- concorrência
-- locking
-- optimistic locking
-- pessimistic locking quando necessário
-- constraints
-- idempotência
-- consistência
-- auditoria
+- Transactions
+- Isolation
+- Concorrência
+- Locking
+- Optimistic locking
+- Pessimistic locking quando necessário
+- Constraints
+- Idempotência
+- Consistência
+- Auditoria
 
 Operações financeiras não devem ser tratadas como simples CRUD.
 
@@ -260,7 +280,8 @@ Operações financeiras não devem ser tratadas como simples CRUD.
 Operações críticas, especialmente financeiras, devem considerar idempotência.
 
 Exemplo:
-- Idempotency-Key
+
+- `Idempotency-Key`
 
 A mesma operação repetida não deve produzir efeitos duplicados.
 
@@ -271,54 +292,61 @@ A implementação deve considerar concorrência e persistência da chave de idem
 Diferenciar:
 
 ### Application logs
+
 Para funcionamento, diagnóstico e troubleshooting.
 
 ### Audit logs
+
 Para eventos relevantes de segurança e negócio.
 
 Exemplos:
-- login
-- falha de autenticação
-- alteração de senha
-- alteração de permissões
-- operações financeiras
-- alterações sensíveis
+
+- Login
+- Falha de autenticação
+- Alteração de senha
+- Alteração de permissões
+- Operações financeiras
+- Alterações sensíveis
 
 Nunca registrar:
-- senhas
-- tokens completos
-- secrets
-- dados sensíveis desnecessários
+
+- Senhas
+- Tokens completos
+- Secrets
+- Dados sensíveis desnecessários
 
 ## 14. Testes
 
 Funcionalidades relevantes devem possuir testes.
 
 Prioridade:
-1. regras de negócio
-2. segurança
-3. endpoints críticos
-4. persistência
-5. integração
+
+1. Regras de negócio
+2. Segurança
+3. Endpoints críticos
+4. Persistência
+5. Integração
 
 Considerar:
-- unit tests
-- integration tests
+
+- Unit tests
+- Integration tests
 - API tests
 - Testcontainers
 
 Não criar testes apenas para aumentar cobertura. Testes devem validar comportamento real.
 
 Criar testes para cenários de segurança relevantes, incluindo:
-- usuário não autenticado
-- usuário sem autorização
-- acesso a recurso de outro usuário
-- token inválido
-- token expirado
-- role insuficiente
-- entradas inválidas
-- duplicação de operações
-- concorrência quando relevante
+
+- Usuário não autenticado
+- Usuário sem autorização
+- Acesso a recurso de outro usuário
+- Token inválido
+- Token expirado
+- Role insuficiente
+- Entradas inválidas
+- Duplicação de operações
+- Concorrência quando relevante
 
 ## 15. Frontend
 
@@ -327,19 +355,21 @@ Frontend é secundário.
 Não é objetivo transformar o usuário em frontend developer.
 
 O frontend deve ser:
-- simples
-- funcional
-- mínimo
-- suficiente para consumir a API
-- suficiente para demonstrar autenticação
-- suficiente para testar os principais fluxos
+
+- Simples
+- Funcional
+- Mínimo
+- Suficiente para consumir a API
+- Suficiente para demonstrar autenticação
+- Suficiente para testar os principais fluxos
 
 Evitar investimento desnecessário em:
+
 - CSS avançado
-- animações
-- design system complexo
+- Animações
+- Design system complexo
 - UX sofisticada
-- arquitetura frontend complexa
+- Arquitetura frontend complexa
 
 A regra crítica deve continuar no backend.
 
@@ -347,17 +377,18 @@ A regra crítica deve continuar no backend.
 
 Usar Docker para tornar o ambiente reproduzível.
 
-Inicialmente, usar Docker/Compose principalmente para dependências como PostgreSQL.
+Inicialmente, usar Docker / Compose principalmente para dependências como PostgreSQL.
 
 Documentar comandos necessários para:
-- iniciar
-- parar
-- testar
-- executar a aplicação
+
+- Iniciar
+- Parar
+- Testar
+- Executar a aplicação
 
 ## 17. Linux
 
-O projeto deve funcionar em Linux/Ubuntu.
+O projeto deve funcionar em Linux / Ubuntu.
 
 Evitar dependências desnecessárias de caminhos ou ferramentas específicas do Windows.
 
@@ -366,6 +397,7 @@ Evitar dependências desnecessárias de caminhos ou ferramentas específicas do 
 AWS será introduzida posteriormente.
 
 A arquitetura pode evoluir para algo como:
+
 - Internet
 - HTTPS / Nginx
 - Spring Boot
@@ -378,30 +410,33 @@ Nunca colocar credenciais AWS no código.
 ## 19. Observabilidade
 
 Posteriormente implementar:
-- logs
-- métricas
-- health checks
-- monitoramento
-- alertas quando apropriado
+
+- Logs
+- Métricas
+- Health checks
+- Monitoramento
+- Alertas quando apropriado
 
 O sistema deve permitir identificar:
-- se está funcionando
-- onde ocorreu um erro
-- quando ocorreu
-- qual operação estava sendo executada
-- se houve comportamento suspeito
+
+- Se está funcionando
+- Onde ocorreu um erro
+- Quando ocorreu
+- Qual operação estava sendo executada
+- Se houve comportamento suspeito
 
 ## 20. CI/CD
 
 Posteriormente implementar pipeline contendo, conforme necessário:
-- build
-- testes
-- security checks
-- dependency scanning
+
+- Build
+- Testes
+- Security checks
+- Dependency scanning
 - SAST
-- secret scanning
+- Secret scanning
 - DAST quando apropriado
-- deploy
+- Deploy
 
 Não criar pipeline complexa antes de existir uma aplicação funcional.
 
@@ -410,6 +445,7 @@ Não criar pipeline complexa antes de existir uma aplicação funcional.
 Usar Git com commits pequenos e semânticos.
 
 Preferir:
+
 - feat:
 - fix:
 - refactor:
@@ -425,6 +461,7 @@ Evitar commits gigantes contendo várias funcionalidades não relacionadas.
 ## 22. Documentação
 
 O projeto deve possuir:
+
 - README.md
 - docs/architecture.md
 - docs/security.md
@@ -442,30 +479,34 @@ Não criar todos antecipadamente sem necessidade. Criar ou atualizar quando houv
 Decisões arquiteturais importantes devem ser documentadas.
 
 Registrar:
-- contexto
-- problema
-- decisão
-- alternativas
-- consequências
+
+- Contexto
+- Problema
+- Decisão
+- Alternativas
+- Consequências
 
 Não deixar decisões importantes somente na conversa com a IA.
 
 ## 24. Uso de IA
 
 O agente pode:
-- implementar código
-- criar testes
-- refatorar
-- investigar erros
-- revisar código
-- revisar segurança
-- criar documentação
-- sugerir arquitetura
+
+- Implementar código
+- Criar testes
+- Refatorar
+- Investigar erros
+- Revisar código
+- Revisar segurança
+- Criar documentação
+- Sugerir arquitetura
 
 Porém:
-- código gerado pela IA não é automaticamente considerado correto ou seguro.
+
+- Código gerado pela IA não é automaticamente considerado correto ou seguro.
 
 O objetivo é desenvolver cinco competências:
+
 - BUILD
 - UNDERSTAND
 - REVIEW
@@ -477,21 +518,23 @@ O usuário deve conseguir compreender, revisar, executar, corrigir e proteger o 
 ## 25. Processo obrigatório do agente
 
 Antes de alterar código:
-1. ler AGENTS.md;
-2. analisar o código existente;
-3. verificar documentação relevante;
-4. verificar se a funcionalidade já existe;
-5. identificar impactos;
-6. propor abordagem quando houver decisão relevante;
-7. implementar a menor mudança necessária.
+
+1. Ler AGENTS.md.
+2. Analisar o código existente.
+3. Verificar documentação relevante.
+4. Verificar se a funcionalidade já existe.
+5. Identificar impactos.
+6. Propor abordagem quando houver decisão relevante.
+7. Implementar a menor mudança necessária.
 
 Depois:
-1. executar testes;
-2. verificar erros;
-3. revisar segurança;
-4. verificar alterações;
-5. atualizar documentação quando necessário;
-6. explicar o resultado.
+
+1. Executar testes.
+2. Verificar erros.
+3. Revisar segurança.
+4. Verificar alterações.
+5. Atualizar documentação quando necessário.
+6. Explicar o resultado.
 
 Nunca apagar ou substituir trabalho existente sem necessidade.
 
@@ -500,22 +543,25 @@ Nunca apagar ou substituir trabalho existente sem necessidade.
 Preferir tarefas pequenas.
 
 Exemplo:
-- "Implemente cadastro de usuários, incluindo DTO, validação, service, repository, migration e testes."
+
+"Implemente cadastro de usuários, incluindo DTO, validação, service, repository, migration e testes."
 
 Evitar:
-- "Construa todo o sistema."
+
+"Construa todo o sistema."
 
 Cada etapa deve deixar o projeto em estado funcional.
 
 ## 27. Dependências
 
 Antes de adicionar uma dependência:
-1. verificar se ela já existe;
-2. verificar se o Spring/Java já oferece solução adequada;
-3. avaliar manutenção;
-4. avaliar segurança;
-5. avaliar necessidade;
-6. considerar impacto arquitetural.
+
+1. Verificar se ela já existe.
+2. Verificar se o Spring / Java já oferece solução adequada.
+3. Avaliar manutenção.
+4. Avaliar segurança.
+5. Avaliar necessidade.
+6. Considerar impacto arquitetural.
 
 Não adicionar tecnologia só para melhorar currículo.
 
@@ -526,10 +572,15 @@ Kafka, Redis, Kubernetes, microservices e outras tecnologias só devem entrar qu
 Após cada etapa significativa, apresentar:
 
 ### Implementado
+
 ### Arquivos alterados
+
 ### Testes executados
+
 ### Decisões técnicas
+
 ### Riscos de segurança
+
 ### Próximo passo
 
 Não avançar automaticamente para uma grande nova funcionalidade.
@@ -561,39 +612,50 @@ O roadmap pode ser alterado quando houver justificativa técnica.
 
 ## 30. Estado atual
 
-FASE ATUAL:
+**FASE ATUAL:**
+
 Fase 1 — Setup
 
-STATUS:
-Em desenvolvimento
+**STATUS:**
 
-JAVA:
+Planejada — Não iniciada
+
+**JAVA:**
+
 25 LTS
 
-SPRING BOOT:
+**SPRING BOOT:**
+
 Versão estável compatível com Java 25
 
-DATABASE:
+**DATABASE:**
+
 PostgreSQL
 
-MIGRATIONS:
+**MIGRATIONS:**
+
 Flyway
 
-ARCHITECTURE:
+**ARCHITECTURE:**
+
 Modular Monolith
 
-FRONTEND:
+**FRONTEND:**
+
 Mínimo / secundário
 
-SECURITY:
+**SECURITY:**
+
 Security by Design
 
-CLOUD:
+**CLOUD:**
+
 AWS posteriormente
 
 ## 31. Regra final
 
 Antes de implementar qualquer funcionalidade, verificar:
+
 1. Isso pertence ao escopo atual?
 2. É necessário agora?
 3. Existe implementação semelhante?
@@ -604,20 +666,7 @@ Antes de implementar qualquer funcionalidade, verificar:
 8. Existe alguma decisão que precisa ser explicada ao usuário?
 
 Priorizar sempre:
-- correção → segurança → simplicidade → testabilidade → observabilidade → evolução.
+
+**Correção → Segurança → Simplicidade → Testabilidade → Observabilidade → Evolução.**
 
 O FocusFlow deve ser desenvolvido como um sistema profissional, mas sem overengineering.
-
-## Instrução final para esta tarefa
-
-Neste momento, NÃO implemente nenhuma funcionalidade nova do FocusFlow.
-
-Faça somente:
-1. analisar o repositório existente;
-2. criar ou revisar o AGENTS.md;
-3. preservar o código existente;
-4. mostrar o conteúdo final do AGENTS.md;
-5. informar eventuais conflitos entre a estrutura existente e estas regras;
-6. aguardar a próxima instrução.
-
-Não iniciar a Fase 1 automaticamente.
