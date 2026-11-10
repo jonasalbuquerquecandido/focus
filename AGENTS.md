@@ -587,28 +587,41 @@ Não avançar automaticamente para uma grande nova funcionalidade.
 
 ## 29. Roadmap macro
 
-1. Setup
-2. Users
-3. Authentication
-4. Tasks
-5. Habits
-6. Goals
-7. Gamification
-8. Financial Module
-9. Testing
-10. Security Hardening
-11. Docker
-12. Linux / Deployment
-13. AWS
-14. HTTPS / Nginx
-15. CI/CD
-16. Observability
-17. Security Testing
-18. AI Features
-19. Performance / Scalability
-20. Production Hardening
+1. **Setup e infraestrutura local**
 
-O roadmap pode ser alterado quando houver justificativa técnica.
+   - Java, Spring Boot, Maven, PostgreSQL, Flyway, Docker Compose e estrutura inicial do projeto.
+2. **Users e Authentication**
+
+   - Cadastro, gerenciamento de usuários, autenticação, autorização e JWT.
+3. **Tasks**
+4. **Habits**
+5. **Goals**
+6. **Gamification**
+7. **Financial Module**
+
+   - Integridade financeira, transações, concorrência e auditoria.
+8. **Quality Assurance**
+
+   - Revisão de testes unitários, testes de integração, testes de API, cenários críticos e confiabilidade.
+9. **Security Hardening**
+
+   - Revisão de permissões, vulnerabilidades, OWASP e testes de segurança.
+10. **Linux e Deployment**
+11. **AWS e infraestrutura Cloud**
+12. **HTTPS e Nginx**
+13. **CI/CD**
+14. **Observability**
+15. **AI Features**
+16. **Performance e Scalability**
+17. **Production Hardening**
+
+### Diretrizes permanentes
+
+- Testes devem acompanhar a implementação de cada funcionalidade.
+- Segurança deve ser considerada desde o início do desenvolvimento.
+- Docker Compose deve ser utilizado desde o Setup para executar dependências locais, especialmente PostgreSQL.
+- Quality Assurance e Security Hardening representam etapas de revisão e fortalecimento, não o início dessas práticas.
+- O roadmap pode ser alterado quando houver justificativa técnica.
 
 ## 30. Estado atual
 
